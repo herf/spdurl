@@ -4,7 +4,7 @@
 
 #### What's an SPD?
 
-SPD means "spectral power distribution" and is the data recorded by a spectrophotometer or spectroradiometer, for measuring the spectrum of a light source or reflectance of a material. 
+SPD means "spectral power distribution" and is the data recorded by a spectroradiometer or spectrophotometer, for measuring the spectrum of a light source or reflectance of a material. 
 
 This library aims to be the web equivalent of "web colors" for spectra with more than three components. You might write "red" as #FF0000, but what would it look like with 40 components? It turns out we can make SPDs relatively small too, so this library provides a simple way to compress and decode these values.
 

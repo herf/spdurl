@@ -41,7 +41,7 @@ var dec = spdurl.decodeSPD(enc);
 
 * Samples are uniformly spaced by wavelength, but any wavelength range is allowed (e.g., visible light is 380-780nm)
 * All values share a single exponent (a power of two) - this matches what happens when using most meters
-* Values are stored with 18 bits of precision, so they be base64 encoded to three bytes each
+* Values are stored with 18 bits of precision (so they use three bytes once base64 encoded)
 * Values are gamma-encoded to enhance the precision of smaller values
 * A web-safe base64 is used (RFC 4648), and we do not require padding
 * No limits on size are provided, however some browsers will discard more than 2K.

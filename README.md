@@ -1,6 +1,6 @@
 # spdurl
 
-*Preliminary format to compress spectral power distributions to fit into a URL*
+*A new format to encode spectral power distributions for the Web*
 
 #### What's an SPD?
 

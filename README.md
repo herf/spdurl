@@ -8,22 +8,6 @@ SPD means "spectral power distribution" and is the data recorded by a spectropho
 
 This library aims to be the web equivalent of "web colors" for spectra with more than three components. You might write "red" as #FF0000, but what would it look like with 40 components? It turns out we can make SPDs relatively small too, so this library provides a simple way to compress and decode these values.
 
-#### Features (and Limits)
-
-* Samples are uniformly spaced by wavelength, but any wavelength range is allowed (e.g., visible light is 380-780nm)
-* All values share a single exponent (a power of two) - this matches what happens when using most meters
-* Values are stored with 18 bits of precision, so they be base64 encoded to three bytes each
-* Values are gamma-encoded to enhance the precision of smaller values
-* A web-safe base64 is used (RFC 4648), and we do not require padding
-* No limits on size are provided, however some browsers will discard more than 2K.
-
-#### Metadata
-
-* The "kind" of SPD can be indicated using a dictionary of types (for instance "uW/cm^2" is called "uw")
-* The time/date a sample was made can be stored using UNIX UTC time (1s precision)
-* Optional: location, name of sample
-* A version number for future revisions
-
 #### Example
 
 Compressing a spectrum recorded from an x-rite meter from 380-730nm in 10nm spacing gives a result like this:
@@ -52,6 +36,23 @@ To decode we can reverse this and get the original data back:
 ```
 var dec = spdurl.decodeSPD(enc);
 ```
+
+#### Features (and Limits)
+
+* Samples are uniformly spaced by wavelength, but any wavelength range is allowed (e.g., visible light is 380-780nm)
+* All values share a single exponent (a power of two) - this matches what happens when using most meters
+* Values are stored with 18 bits of precision, so they be base64 encoded to three bytes each
+* Values are gamma-encoded to enhance the precision of smaller values
+* A web-safe base64 is used (RFC 4648), and we do not require padding
+* No limits on size are provided, however some browsers will discard more than 2K.
+
+#### Metadata
+
+* The "kind" of SPD can be indicated using a dictionary of types (for instance "uW/cm^2" is called "uw")
+* The time/date a sample was made can be stored using UNIX UTC time (1s precision)
+* Optional: location, name of sample
+* A version number for future revisions
+
 
 #### Compression rate
 

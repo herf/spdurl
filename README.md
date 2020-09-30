@@ -26,7 +26,7 @@ This library aims to be the web equivalent of "web colors" for spectra with more
 
 #### Example
 
-Compressing a spectrum recorded from an x-rite meter from 380-730nm in 10nm spacing gives a result like this (136 bytes, including the date):
+Compressing a spectrum recorded from an x-rite meter from 380-730nm in 10nm spacing gives a result like this:
 
 ```
 var spdurl = require("./spdurl");
@@ -42,6 +42,8 @@ spd.data = [1.039693,1.039379,1.039198,1.564554,1.696937,1.583408,1.778512,1.970
 var enc = spdurl.encodeSPD(spd);
 console.log(enc);
 ```
+
+The result is 136 bytes, including the date:
 
 `spd1,380,10,uw,1601502089,1,zdczdHzc66-F8lq7NL9i1_rw_P49y687T8Iy8CW7Qh6PC6r06nw6nl5_y49H30D2Rm1bf0tIz7EzbLzD1x1pw2_wN6vMYuWkxHj0nV2Jj5i8`
 
@@ -59,6 +61,10 @@ For instance, given 401 values from an LED (380-780nm):
 
 * Compressing 401 values with zstd: 2120 bytes (base64 encoded)
 * This method: 1206 bytes
+
+#### Future revisions/TODO
+
+We will make changes to allow more flexible metadata encoding (optional values like location), and we may compress dates and other types also.
 
 #### Languages/environments
 

@@ -26,11 +26,11 @@ Example:
 
 Compressing a spectrum recorded from an x-rite meter from 380-730nm in 10nm spacing gives a result like this (136 bytes, including the date):
 
-spd1,380,10,uw,1601502089,1,zdczdHzc66-F8lq7NL9i1_rw_P49y687T8Iy8CW7Qh6PC6r06nw6nl5_y49H30D2Rm1bf0tIz7EzbLzD1x1pw2_wN6vMYuWkxHj0nV2Jj5i8
+`spd1,380,10,uw,1601502089,1,zdczdHzc66-F8lq7NL9i1_rw_P49y687T8Iy8CW7Qh6PC6r06nw6nl5_y49H30D2Rm1bf0tIz7EzbLzD1x1pw2_wN6vMYuWkxHj0nV2Jj5i8`
 
-Performance:
+Compression rate:
 
-This is a very simple method, but even against "good" compression algorithms (e.g., zstd), this library produces encodings that can be half the size.
+This method is rather simple, but even against "good" compression algorithms (e.g., zstd), this library produces encodings that can be half the size.
 
 For instance, given 401 values from an LED (380-780nm):
 * Compressing with zstd: 2120 bytes, base64 encoded

@@ -44,11 +44,11 @@ var dec = spdurl.decodeSPD(enc);
 * Values are stored with 18 bits of precision (so they use three bytes once base64 encoded)
 * Values are gamma-encoded to enhance the precision of smaller values
 * A web-safe base64 is used (RFC 4648), and we do not require padding
-* No limits on size are provided, however some browsers will discard more than 2K.
+* No limits on size are provided, however some browsers will discard more than 2KB.
 
 #### Metadata
 
-* The "kind" of SPD can be indicated using a dictionary of types (for instance "uW/cm^2" is called "uw")
+* The "kind" of SPD can be indicated using a dictionary of types (for instance "uW/cm^2" is called "uwi")
 * The time/date a sample was made can be stored using UNIX UTC time (1s precision)
 * Optional: location, name of sample
 * A version number for future revisions

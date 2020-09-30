@@ -29,12 +29,54 @@ function SPD() {
 	this.base = 380;
 	this.delta = 1;
 	this.data = [];
-	this.unit = "uw";
+	this.unit = "uwi";
 
 	// some metadata
 	//this.name = "";
 	this.date = 0;
 }
+
+// list of selected, abbreviated units:
+const UnitMap = {
+
+	// "fractions"
+	"as": "Action spectrum (power)",
+	"tr": "Fraction transmitted",
+	"re": "Fraction reflected",
+
+	// power units (total, irradiance, radiance)
+	"uw": "uW total",
+	"mw": "mW total",
+	"w": "W total",
+	"uwi": "uW/cm^2",
+	"mwi": "mW/cm^2",
+	"wi": "W/m^2",
+	"uwr": "uW/cm^2/sr",
+	"mwr": "mW/cm^2/sr",
+	"wr": "W/m^2/sr",
+
+	// energy units (total, irradiance, radiance)
+	"uj": "uJ total",
+	"mj": "mJ total",
+	"j": "J total",
+	"uji": "uJ/cm^2",
+	"mji": "mJ/cm^2",
+	"ji": "J/m^2",
+	"ujr": "uJ/cm^2/sr",
+	"mjr": "mJ/cm^2/sr",
+	"jr": "J/m^2/sr",
+
+	// Quanta/mol units
+	"q": "quanta (photons)",
+	"qi": "q/cm^2",
+	"qr": "q/cm^2/sr",
+	"lq": "log10(quanta)",
+	"lqi": "log10(quanta)/cm^2",
+	"lqr": "log10(quanta)/cm^2/sr",
+	"mm": "mmol",
+	"mmi": "mmol/cm^2",
+	"mmr": "mmol/cm^2/sr"
+};
 
 SPD.prototype.err = function(spd) {
 	if (spd.base != this.base) return -1;
@@ -53,6 +95,10 @@ SPD.prototype.err = function(spd) {
 
 	// RMSE:
 	return Math.sqrt(terr / spd.data.length);
+}
+
+SPD.prototype.Unit = function(spd) {
+	return UnitMap[this.unit];
 }
 
 function encodeSPD(spd) {

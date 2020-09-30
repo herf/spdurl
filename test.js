@@ -48,5 +48,5 @@ for (var s in std) {
 	spd.delta = 5;
 	spd.data = std[s];
 
-	console.log(s, spdurl.encodeSPD(spd));
+	console.log(s, spd.Unit(), spdurl.encodeSPD(spd));
 }

@@ -1,0 +1,23 @@
+{
+  "name": "spdurl",
+  "version": "1.0.0",
+  "description": "Compress spectral power distributions to fit into a URL",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "spdurl.js"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/herf/spdurl.git"
+  },
+  "author": "Michael Herf",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/herf/spdurl/issues"
+  },
+  "homepage": "https://github.com/herf/spdurl#readme"
+}

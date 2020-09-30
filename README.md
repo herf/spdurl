@@ -59,3 +59,7 @@ For instance, given 401 values from an LED (380-780nm):
 
 * Compressing 401 values with zstd: 2120 bytes (base64 encoded)
 * This method: 1206 bytes
+
+#### Languages/environments
+
+This library is provided for Javascript and node.js, but we are happy to take contributions for other languages as well.

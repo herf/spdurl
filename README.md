@@ -28,7 +28,8 @@ This library aims to be the web equivalent of "web colors" for spectra with more
 
 Compressing a spectrum recorded from an x-rite meter from 380-730nm in 10nm spacing gives a result like this (136 bytes, including the date):
 
-```var spdurl = require("./spdurl");
+```
+var spdurl = require("./spdurl");
 
 // make an SPD and encode/decode roundtrip:
 var spd = spdurl.SPD();

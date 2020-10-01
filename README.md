@@ -34,7 +34,7 @@ The result is 90 bytes:
 To decode this we can easily get the original data back:
 
 ```
-var dec = spdurl.decodeSPD(enc);
+var spdagain = spdurl.decodeSPD(enc);
 ```
 
 You can optionally add metadata, so here is a date, location, and a name (now 132 bytes):
@@ -52,9 +52,9 @@ You can optionally add metadata, so here is a date, location, and a name (now 13
 
 #### Metadata
 
-* The "kind" of SPD can be indicated using a dictionary of types (for instance "uW/cm^2" is called "uwi")
-* Optional metadata: location, name of sample, date
+* The "kind" of SPD must be indicated using a dictionary of types (the default is "uW/cm^2" and is abbreviated "uwi")
 * A version number for future revisions
+* Optional metadata: location, name of sample, date (in UTC unix time)
 
 #### Compression rate
 

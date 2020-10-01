@@ -1,6 +1,6 @@
 # spdurl
 
-*A new format to encode spectral power distributions for the Web*
+*An encoder to represent spectral data for the Web*
 
 #### What's a SPD?
 
@@ -27,7 +27,7 @@ var enc = spdurl.encodeSPD(spd);
 console.log(enc);
 ```
 
-The result is 90 bytes, including the date and other metadata:
+The result is 90 bytes:
 
     spd1,380,10,uwi,4,uJuIuI4m68488W_h-38t7c6S6J5A3i4M4G4G3N1u0Hx-w0v0uwuFtmr-qsp2ohncrBvsxz2j
 
@@ -37,7 +37,7 @@ To decode this we can easily get the original data back:
 var dec = spdurl.decodeSPD(enc);
 ```
 
-We can optionally add metadata, here with a date, location, and a name (now 132 bytes):
+You can optionally add metadata, so here is a date, location, and a name (now 132 bytes):
 
 	spd1,380,10,uwi,4,uJuIuI4m68488W_h-38t7c6S6J5A3i4M4G4G3N1u0Hx-w0v0uwuFtmr-qsp2ohncrBvsxz2j,d1601573778,ni1Studio%20Sample,l34:-118.5
 

@@ -5,19 +5,29 @@ var spd = spdurl.SPD();
 
 spd.base = 380;
 spd.delta = 10;
-spd.date = Math.floor(new Date().valueOf() / 1000);
 spd.data = [1.039693,1.039379,1.039198,1.564554,1.696937,1.583408,1.778512,1.970525,1.930359,1.800388,1.725509,1.659314,1.651000,1.587592,1.506774,1.541956,1.536947,1.536743,1.488346,1.409579,1.326508,1.219819,1.163692,1.117009,1.068008,1.037550,1.015638,0.944459,0.889883,0.855271,0.801936,0.759832,0.904105,1.111251,1.211360,1.453921];
 
 var enc = spdurl.encodeSPD(spd);
-console.log("Encoded URL = " + enc);
+console.log("URL-safe encoding = " + enc);
 console.log(enc.length + " bytes");
 
 var dec = spdurl.decodeSPD(enc);
 //console.log(dec);
 
-var relerr = spd.err(dec);
+spd.date = Math.floor(new Date().valueOf() / 1000);
+spd.name = "i1Studio Sample";
+spd.loc = [34, -118.5];
 
-console.log("relerr", relerr);
+enc = spdurl.encodeSPD(spd);
+console.log("URL-safe encoding with metadata = " + enc);
+console.log(enc.length + " bytes");
+dec = spdurl.decodeSPD(enc);
+//console.log(dec);
+
+var relerr = spd.err(dec);
+var linerr = spd.err(dec, 1);
+
+console.log("err geometric", relerr, "linear", linerr);
 
 // examples using some CIE standard illuminants
 const illumA 	= [9.8, 10.9, 12.09, 13.35, 14.71, 16.15, 17.68, 19.29, 20.99, 22.79, 24.67, 26.64, 28.7, 30.85, 33.09, 35.41, 37.81, 40.3, 42.87, 45.52, 48.24, 51.04, 53.91, 56.85, 59.86, 62.93, 66.06, 69.25, 72.5, 75.79, 79.13, 82.52, 85.95, 89.41, 92.91, 96.44, 100.0, 103.58, 107.18, 110.8, 114.44, 118.08, 121.73, 125.39, 129.04, 132.7, 136.35, 139.99, 143.62, 147.24, 150.84, 154.42, 157.98, 161.52, 165.03, 168.51, 171.96, 175.38, 178.77, 182.12, 185.43, 188.7, 191.93, 195.12, 198.26, 201.36, 204.41, 207.41, 210.36, 213.27, 216.12, 218.92, 221.67, 224.36, 227.0, 229.59, 232.12, 234.59, 237.01, 239.37, 241.68];
@@ -48,5 +58,42 @@ for (var s in std) {
 	spd.delta = 5;
 	spd.data = std[s];
 
+	//var t = spdurl.encodeSPD(spd);
+	//var s = spdurl.decodeSPD(t);
+
+	//var errs = spd.testErr();
+
 	console.log(s, spd.Unit(), spdurl.encodeSPD(spd));
+	//console.log("geometric: 1 in " + (1.0 / errs.geom).toFixed(1), "linear: 1 in " + (1.0 / errs.lin).toFixed(1));
+
+	//console.log(spd);
+	//console.log(s);
 }
+
+
+/*
+// regress F11 because it is hard:
+for (var g = 0.1; g < 3.5; g += 0.05) {
+
+	var spd = spdurl.SPD();
+	spd.base = 380;
+	spd.delta = 5;
+	spd.data = F11;
+
+	console.log(g, spd.testErr(g));
+}
+
+for (var g = 0.1; g < 3.5; g += 0.05) {
+
+	var te = 0;
+	for (var s in std) {
+		var spd = spdurl.SPD();
+		spd.base = 380;
+		spd.delta = 5;
+		spd.data = std[s];
+
+		te += spd.testErr(g);
+	}
+	console.log(g, te);
+}
+*/

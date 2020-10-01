@@ -27,9 +27,9 @@ var enc = spdurl.encodeSPD(spd);
 console.log(enc);
 ```
 
-The result is 136 bytes, including the date and other metadata:
+The result is 90 bytes, including the date and other metadata:
 
-    spd1,380,10,uw,1601502089,1,zdczdHzc66-F8lq7NL9i1_rw_P49y687T8Iy8CW7Qh6PC6r06nw6nl5_y49H30D2Rm1bf0tIz7EzbLzD1x1pw2_wN6vMYuWkxHj0nV2Jj5i8
+    spd1,380,10,uwi,4,uJuIuI4m68488W_h-38t7c6S6J5A3i4M4G4G3N1u0Hx-w0v0uwuFtmr-qsp2ohncrBvsxz2j
 
 To decode this we can easily get the original data back:
 
@@ -37,35 +37,33 @@ To decode this we can easily get the original data back:
 var dec = spdurl.decodeSPD(enc);
 ```
 
+We can optionally add metadata, here with a date, location, and a name (now 132 bytes):
+
+	spd1,380,10,uwi,4,uJuIuI4m68488W_h-38t7c6S6J5A3i4M4G4G3N1u0Hx-w0v0uwuFtmr-qsp2ohncrBvsxz2j,d1601573778,ni1Studio%20Sample,l34:-118.5
+
 #### Features (and Limits)
 
-* Values are stored with 18 bits of precision (so they use three bytes once base64 encoded)
-* All values share a single exponent (a power of two)
-* Samples are uniformly spaced by wavelength, but any wavelength range is allowed (e.g., visible light is 380-780nm)
+* Values are stored with 12 bits of precision, gamma-encoded (they use two bytes once base64 encoded)
+* All values share a single exponent
 * Values are gamma-encoded to enhance the precision of smaller values
-* A web-safe base64 is used (RFC 4648), and we do not require padding
+* Samples are uniformly spaced by wavelength, but any wavelength range is allowed (e.g., visible light is 380-780nm)
+* A web-safe base64 is used (RFC 4648)
 * No limits on size are provided, however some browsers will discard more than 2KB.
 
 #### Metadata
 
 * The "kind" of SPD can be indicated using a dictionary of types (for instance "uW/cm^2" is called "uwi")
-* The time/date a sample was made can be stored using UNIX UTC time (1s precision)
-* Optional: location, name of sample
+* Optional metadata: location, name of sample, date
 * A version number for future revisions
-
 
 #### Compression rate
 
-This method is rather simple, but even against sophisticated compression algorithms (e.g., zstd), this library produces encodings that can be 20-50% smaller.
+This method is rather simple, but even against sophisticated compression algorithms (e.g., zstd), this library produces encodings that can be half the size.
 
 For instance, given 401 values from an LED (380-780nm):
 
-* Compressing 401 values with zstd: 2120 bytes (base64 encoded)
-* This method: 1206 bytes
-
-#### Future revisions/TODO
-
-We will make changes to allow more flexible metadata encoding (optional values like location), and we may compress dates and other types also.
+* Compressing 401 values with zstd: 2120 bytes (base64 encoded), which doesn't work in all browsers
+* This method: 804 bytes, which is a valid URL
 
 #### Languages/environments
 

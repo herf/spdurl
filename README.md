@@ -4,13 +4,13 @@
 
 #### What's a SPD?
 
-SPD means "spectral power distribution" and is the data recorded by a spectroradiometer or spectrophotometer, for recording the spectrum of a light source or reflectance of a material. 
+SPD means "spectral power distribution", and it's commonly used to record data about a light source or reflectance of a material. 
 
-This library aims to be the equivalent of "web colors" for spectra with more than three components. You might write "red" as #FF0000, but how would it look with 40 components? It turns out we can make SPDs relatively small too, so this library provides a simple way to compress and decode these values.
+This library aims to be the equivalent of "web colors" for spectra. You might write "red" as #FF0000, but how would it look with 40 components? It turns out we can make SPDs relatively small too, so this library provides a simple way to compress and decode these values.
 
 #### Example
 
-Here's how we compress the spectrum recorded from an x-rite meter from 380-730nm in 10nm spacing:
+Here's how we compress the spectrum recorded from an x-rite meter from 380-730nm, using 10nm spacing:
 
 ```
 var spdurl = require("./spdurl");
@@ -31,34 +31,39 @@ The result is 90 bytes:
 
     spd1,380,10,uwi,4,uJuIuI4m68488W_h-38t7c6S6J5A3i4M4G4G3N1u0Hx-w0v0uwuFtmr-qsp2ohncrBvsxz2j
 
-To decode this we can easily get the original data back:
+Decoding this string is easy, giving the original data back:
 
 ```
 var spdagain = spdurl.decodeSPD(enc);
 ```
 
-You can optionally add metadata, so here is a date, location, and a name (now 132 bytes):
+Metadata is optional, so here is a date, location, and a name (now 132 bytes):
 
 	spd1,380,10,uwi,4,uJuIuI4m68488W_h-38t7c6S6J5A3i4M4G4G3N1u0Hx-w0v0uwuFtmr-qsp2ohncrBvsxz2j,d1601573778,ni1Studio%20Sample,l34:-118.5
 
 #### Features (and Limits)
 
-* Values are stored with 12 bits of precision, gamma-encoded (they use two bytes once base64 encoded)
-* All values share a single exponent
-* Values are gamma-encoded to enhance the precision of smaller values
-* Samples are uniformly spaced by wavelength, but any wavelength range is allowed (e.g., visible light is 380-780nm)
-* A web-safe base64 is used (RFC 4648)
-* No limits on size are provided, however some browsers will discard more than 2KB.
+* Value encoding:
+  * Stored with 12 bits of precision (they use two bytes once base64 encoded)
+  * Gamma-encoded to enhance the precision of smaller values
+  * Use a shared exponent to set the scale
+* Samples must be uniformly spaced by wavelength, but any wavelength range is allowed (e.g., visible light is 380-780nm)
+* Web-safe base64 is used (RFC 4648)
+* No limits on size are enforced, however some browsers will discard more than 2KB.
 
 #### Metadata
 
-* The "kind" of SPD must be indicated using a dictionary of types (the default is "uW/cm^2" and is abbreviated "uwi")
-* A version number for future revisions
-* Optional metadata: location, name of sample, date (in UTC unix time)
+* Required
+  * The "kind" of SPD must be indicated using a dictionary of types (the default is "uW/cm^2" and is abbreviated "uwi")
+  * A version number for future revisions
+* Optional metadata: 
+  * Name of sample
+  * Date (in UTC unix time)
+  * Location (lat, long)
 
 #### Compression rate
 
-This method is rather simple, but even against sophisticated compression algorithms (e.g., zstd), this library produces encodings that can be half the size.
+Compared with sophisticated compression algorithms (e.g., zstd), this library produces encodings that can be half the size.
 
 For instance, given 401 values from an LED (380-780nm):
 

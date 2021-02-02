@@ -58,18 +58,28 @@ for (var s in std) {
 	spd.delta = 5;
 	spd.data = std[s];
 
-	//var t = spdurl.encodeSPD(spd);
-	//var s = spdurl.decodeSPD(t);
+	var t = spdurl.encodeSPD(spd);
+	var dec = spdurl.decodeSPD(t);
 
+	var errlin = spd.err(dec, true);
+	var errgeo = spd.err(dec);
 	//var errs = spd.testErr();
 
 	console.log(s, spd.Unit(), spdurl.encodeSPD(spd));
-	//console.log("geometric: 1 in " + (1.0 / errs.geom).toFixed(1), "linear: 1 in " + (1.0 / errs.lin).toFixed(1));
+	console.log("geometric: 1 in " + (1.0 / errgeo).toFixed(1), "linear: 1 in " + (1.0 / errlin).toFixed(1));
 
 	//console.log(spd);
 	//console.log(s);
 }
 
+// UVEX SCT-orange transmitted
+var uvex = new spdurl.SPD();
+uvex.data = [0.003440, 0.002274, 0.001004, 0.002144, 0.001289, 0.002491, 0.001582, 0.001415, 0.001473, 0.001157, 0.001249, 0.001939, 0.002493, 0.002383, 0.003002, 0.011234, 0.150197, 0.509473, 0.775612, 0.868799, 0.896861, 0.907074, 0.913337, 0.917050, 0.920723, 0.925688, 0.929189, 0.930958, 0.934355, 0.939116, 0.942479, 0.944489, 0.947025, 0.950552, 0.953098, 0.952617];
+uvex.base = 380;
+uvex.delta = 10;
+uvex.unit = "tr";
+
+console.log(spdurl.encodeSPD(uvex));
 
 /*
 // regress F11 because it is hard:
